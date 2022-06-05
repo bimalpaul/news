@@ -28,6 +28,6 @@ Detailed goals below:
 
 After the completion of this challenge, we will schedule a follow-up discussion.
 
-### Documentation
+## Documentation
  * [Setup](./documentation/Setup.md) 
  * [Design Choices](./documentation/DesignChoices.md)

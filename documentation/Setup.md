@@ -13,7 +13,7 @@ Pretty straightforward, I think. 🎳
 
 If you're having issues with the API, it's most likely because it's run out of allowed requests
 * [Generate an API 🔑 on NewsAPI.org](https://newsapi.org/register)
-* Edit the [fetch file](../src/getNews.js) - line 3 with the new key
+* Edit the [fetch file](../src/getNews.js#L3) - line 3 with the new key
    * `const apiKey = '** your new key **';`
 
    
