@@ -156,7 +156,17 @@ const NewsApp = () => {
 						</Box>
 					)}
 					{totalCount > pageResultLimit && !loading && (
-						<Footer background='black' justify='center' pad='small'>
+						<Footer
+							background='black'
+							justify='center'
+							pad='small'
+							style={{
+								borderBottom: '1px solid white',
+								width: '100%',
+								position: 'sticky',
+								bottom: '0px',
+							}}
+						>
 							<Pagination
 								step={pageResultLimit}
 								size='medium'

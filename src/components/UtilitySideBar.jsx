@@ -25,8 +25,12 @@ const UtilitySideBar = () => {
 					<Box
 						background='#272b2d'
 						width='30vw'
-						height='100vh'
-						style={{ borderBottom: '1px solid white' }}
+						style={{
+							borderBottom: '1px solid white',
+							position: 'sticky',
+							top: '70px',
+							height: '100vh',
+						}}
 					>
 						<Header
 							pad='small'

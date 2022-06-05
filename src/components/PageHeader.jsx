@@ -18,6 +18,8 @@ const PageHeader = () => {
 			style={{
 				borderBottom: '1px solid white',
 				width: '100%',
+				position: 'sticky',
+				top: '0px',
 			}}
 		>
 			<Avatar src='news.png' size='medium' round='xsmall' />
