@@ -31,3 +31,16 @@ After the completion of this challenge, we will schedule a follow-up discussion.
 ## Documentation
  * [Setup](./documentation/Setup.md) 
  * [Design Choices](./documentation/DesignChoices.md)
+
+## Screenshots
+
+![2022-06-05_14-41-17](https://user-images.githubusercontent.com/19557345/172071797-93c50bdc-99a3-4c22-acdf-3a6ae4667a54.png)
+
+## Favorites: 
+![2022-06-05_14-43-33](https://user-images.githubusercontent.com/19557345/172071882-4097d631-81db-4d3b-b476-81500bc62415.png)
+
+## Filters: 
+![2022-06-05_14-43-45](https://user-images.githubusercontent.com/19557345/172071884-2acca373-1317-4e36-85b7-c2f8ed54f0e1.png)
+
+
+
