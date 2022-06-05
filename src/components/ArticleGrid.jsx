@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { Grid, Card, Image, CardBody, Button, Box } from 'grommet';
 import { Pin, Star } from 'grommet-icons';
 import moment from 'moment';
+import HtmlParser from 'react-html-parser';
 import { NewsContextConsumer } from '../NewsContext';
 
 const ArticleGrid = () => (
@@ -75,7 +76,7 @@ const ArticleGrid = () => (
 										<div>{article.author}</div>
 									</div>
 								</div>
-								{article.description}
+								{HtmlParser(article.description)}
 							</CardBody>
 						</Card>
 					);
