@@ -13,13 +13,14 @@ const PageHeader = () => {
 	const [typedText, setTypedText] = useState(searchText);
 	return (
 		<Header
-			background='black'
+			background='#272b2d'
 			pad='small'
 			style={{
-				borderBottom: '1px solid white',
+				borderBottom: '1px solid #F3E8D4',
 				width: '100%',
 				position: 'sticky',
 				top: '0px',
+				color: '#F3E8D4',
 			}}
 		>
 			<Avatar src='news.png' size='medium' round='xsmall' />
@@ -39,7 +40,7 @@ const PageHeader = () => {
 			<Clock type='digital' hourLimit={12} />
 			<Box
 				overflow='hidden'
-				background={isUtilitySidebarOpen ? 'white' : 'black'}
+				background={isUtilitySidebarOpen ? '#F3E8D4' : 'black'}
 				round='full'
 			>
 				<Button

@@ -7,13 +7,11 @@ import { NewsContextProvider } from './NewsContext';
 import getNews from './getNews';
 import ArticleGrid from './components/ArticleGrid';
 import {
-	availableCategories,
-	availableCountries,
 	availableLanguages,
-	availableNewsTypes,
 	availableSortFields,
 	availableSearchFields,
 } from './defaults';
+import InfoBox from './components/InfoBox';
 
 const theme = {
 	global: {
@@ -36,7 +34,9 @@ const NewsApp = () => {
 	const [filterLanguage, setFilterLanguage] = useState(availableLanguages[0]);
 	const [sortBy, setSortBy] = useState(availableSortFields[0]);
 	const [searchFields, setSearchFields] = useState([availableSearchFields[0]]);
-	const [viewedArticles, steViewedArticles] = useState([]);
+	const [viewedArticles, setViewedArticles] = useState(
+		JSON.parse(sessionStorage.getItem('viewedArticles')) || [],
+	);
 
 	const apiLimitationTotal = 100;
 	const [pageNumber, setPageNumber] = useState(1);
@@ -72,7 +72,7 @@ const NewsApp = () => {
 		setSortBy,
 		setSearchFields,
 		viewedArticles,
-		steViewedArticles,
+		setViewedArticles,
 		...filters,
 	};
 
@@ -109,62 +109,42 @@ const NewsApp = () => {
 
 	useEffect(() => {
 		sessionStorage.setItem('newsFavorites', JSON.stringify(favorites));
-	}, [favorites]);
+		sessionStorage.setItem('viewedArticles', JSON.stringify(viewedArticles));
+	}, [favorites, viewedArticles]);
 
 	return (
 		<Grommet theme={theme}>
 			<NewsContextProvider value={contextValue}>
 				<Page height='100%' background='#F3E8D4'>
 					<PageHeader />
-					<Box flex direction='row'>
-						<Box flex pad='small'>
-							<ArticleGrid articles={articles} />
-						</Box>
-						{!hasError && totalCount > 0 && (
+					{!loading && !hasError && (
+						<Box flex direction='row'>
+							<Box flex pad='small'>
+								<ArticleGrid articles={articles} />
+							</Box>
 							<Collapsible direction='horizontal' open={isUtilitySidebarOpen}>
 								<UtilitySideBar />
 							</Collapsible>
-						)}
-					</Box>
-					{totalCount === 0 && !loading && !hasError && (
-						<Box
-							height='50vh'
-							width='100vw'
-							pad='large'
-							background='brand'
-							animation={{ type: 'pulse', duration: 4000 }}
-							align='center'
-						>
-							No results! 😭
 						</Box>
+					)}
+					{totalCount === 0 && !loading && !hasError && (
+						<InfoBox>No results! 😭</InfoBox>
 					)}
 					{hasError && !loading && (
-						<Box
-							height='50vh'
-							width='100vw'
-							pad='large'
-							background='brand'
-							animation={{ type: 'pulse', duration: 4000 }}
-							align='center'
-						>
-							Looks like the News API failed! 😭
-						</Box>
+						<InfoBox>Looks like the News API failed! 😭</InfoBox>
 					)}
-					{loading && (
-						<Box height='100vh' width='100vw' pad='large'>
-							Loading data...
-						</Box>
-					)}
+					{loading && <InfoBox>Loading...</InfoBox>}
 					{totalCount > pageResultLimit && !loading && (
 						<Footer
-							background='black'
+							background='#272b2d'
 							justify='center'
 							pad='small'
 							style={{
-								borderBottom: '1px solid white',
+								border: '1px solid #F3E8D4',
 								width: '100%',
 								position: 'sticky',
 								bottom: '0px',
+								color: '#F3E8D4',
 							}}
 						>
 							<Pagination

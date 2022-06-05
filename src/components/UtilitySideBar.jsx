@@ -26,16 +26,17 @@ const UtilitySideBar = () => {
 						background='#272b2d'
 						width='30vw'
 						style={{
-							borderBottom: '1px solid white',
+							border: '1px solid #F3E8D4',
 							position: 'sticky',
 							top: '70px',
 							height: '100vh',
+							color: '#F3E8D4',
 						}}
 					>
 						<Header
 							pad='small'
 							align='center'
-							style={{ borderBottom: '1px solid white' }}
+							style={{ borderBottom: '1px solid #F3E8D4' }}
 						>
 							<Box round='full' overflow='hidden' size='xsmall'>
 								<Button
@@ -76,6 +77,7 @@ const UtilitySideBar = () => {
 									<Card
 										pad='small'
 										key={index}
+										background='#F3E8D4'
 										style={{ margin: '5px 2px', cursor: 'pointer' }}
 										onClick={() => window.open(fav.url)}
 									>
@@ -85,7 +87,7 @@ const UtilitySideBar = () => {
 												<Box round='full' overflow='hidden' background='#E3735E'>
 													<Button
 														hoverIndicator
-														icon={<Trash size='small' color='white' />}
+														icon={<Trash size='small' color='#F3E8D4' />}
 														onClick={(e) => {
 															e.stopPropagation();
 															removeFavorite(fav);

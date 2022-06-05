@@ -1,14 +1,20 @@
 import React, { memo } from 'react';
 import { Grid, Card, Image, CardBody, Button, Box } from 'grommet';
-import { Pin, Star } from 'grommet-icons';
+import { FingerPrint, FormView, Pin, Star, View } from 'grommet-icons';
 import moment from 'moment';
 import HtmlParser from 'react-html-parser';
 import { NewsContextConsumer } from '../NewsContext';
 
 const ArticleGrid = () => (
 	<NewsContextConsumer>
-		{({ articles, favorites, setFavorites }) => (
-			<Grid columns='medium' gap='medium'>
+		{({
+			articles,
+			favorites,
+			setFavorites,
+			viewedArticles,
+			setViewedArticles,
+		}) => (
+			<Grid columns='medium' gap='small'>
 				{articles?.map((article, index) => {
 					const timeNow = moment();
 					const publishedTime = moment(article.publishedAt);
@@ -21,23 +27,43 @@ const ArticleGrid = () => (
 						setFavorites(copy);
 					};
 
+					const isViewed =
+						viewedArticles.map((viewed) => viewed.url)?.indexOf(article.url) > -1;
+					const isFavorite =
+						favorites.map((fave) => fave.url)?.indexOf(article.url) > -1;
+
 					return (
 						<Card
 							pad='medium'
 							key={index}
-							background='black'
+							background={isViewed ? 'dark-3' : 'black'}
 							style={{
 								fontSize: '14px',
-								cursor: 'pointer',
+								cursor: isViewed ? 'auto' : 'pointer',
+								color: '#F3E8D4',
+								overflow: 'auto',
 							}}
-							onClick={() => window.open(article.url)}
+							onClick={() => {
+								const copOfViewed = [...viewedArticles];
+								copOfViewed.push(article);
+								setViewedArticles(copOfViewed);
+								window.open(article.url);
+							}}
 						>
 							<div style={{ display: 'flex', alignItems: 'center' }}>
 								<div style={{ marginRight: 10 }}>
 									<b>{article.title}</b>
 								</div>
 								<div style={{ marginLeft: 'auto' }}>
-									{favorites.map((fave) => fave.url)?.indexOf(article.url) > -1 ? (
+									{isViewed && (
+										<Box round='full' overflow='hidden' background='gray'>
+											<Button
+												hoverIndicator
+												icon={<FingerPrint size='medium' color='black' />}
+											/>
+										</Box>
+									)}
+									{!isViewed && isFavorite ? (
 										<Box round='full' overflow='hidden' background='purple'>
 											<Button
 												hoverIndicator
@@ -46,16 +72,18 @@ const ArticleGrid = () => (
 											/>
 										</Box>
 									) : (
-										<Box round='medium' overflow='hidden' background='white'>
-											<Button
-												hoverIndicator
-												icon={<Pin size='small' color='black' />}
-												onClick={(e) => {
-													e.stopPropagation();
-													setFavorites([...favorites, article]);
-												}}
-											/>
-										</Box>
+										!isViewed && (
+											<Box round='medium' overflow='hidden' background='#F3E8D4'>
+												<Button
+													hoverIndicator
+													icon={<Pin size='small' color='black' />}
+													onClick={(e) => {
+														e.stopPropagation();
+														setFavorites([...favorites, article]);
+													}}
+												/>
+											</Box>
+										)
 									)}
 								</div>
 							</div>
@@ -66,7 +94,7 @@ const ArticleGrid = () => (
 											src={article.urlToImage}
 											width={200}
 											height={100}
-											fallback='//v2.grommet.io/assets/IMG_4245.jpg'
+											fallback='v2.grommet.io/assets/IMG_4245.jpg'
 										/>
 									</div>
 									<div>

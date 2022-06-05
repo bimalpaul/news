@@ -6,7 +6,7 @@ import 'util'
 import { Buffer } from 'buffer'
 window.Buffer = Buffer
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('news'));
 root.render(
   <React.StrictMode>
     <NewsApp />
