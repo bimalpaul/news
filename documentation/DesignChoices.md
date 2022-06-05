@@ -1,0 +1,1 @@
+# The design is roughly based off of Google news news.google.com 
